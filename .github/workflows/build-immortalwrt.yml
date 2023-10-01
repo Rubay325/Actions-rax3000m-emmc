@@ -23,7 +23,7 @@ on:
       USE_26MHZ:
         description: 'Use 26MHz max-frequency'
         required: true
-        default: 'false'
+        default: false
         type: boolean
 
 env:
@@ -95,7 +95,7 @@ jobs:
         find dl -size -1024c -exec rm -f {} \;
 
     - name: 设置 dts 闪存频率
-      if: env.USE_26MHZ == 'false'
+      if: env.USE_26MHZ == false
       run: |
         sed -i 's/26000000/52000000/g' openwrt/target/linux/mediatek/dts/mt7981b-cmcc-rax3000m-emmc-ubootmod.dts
         grep max-frequency openwrt/target/linux/mediatek/dts/mt7981b-cmcc-rax3000m-emmc-ubootmod.dts
